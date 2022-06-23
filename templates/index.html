@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            .headercss{
+                background: #00a3cca8;
+                padding: 25px;
+            }
+            .headercss > img{
+                width: 120px;
+            }
+            .headercss > h1{
+                color: white;
+                font-family: cursive;
+                font-weight: revert;
+                width: 53%;
+            }
+            .QueryCss{
+                font-family: cursive;
+                font-weight: revert;
+                color: white;
+                text-align: center;
+                padding:10px ;
+            }
+            .ResultData{
+                border: 1px solid #9b9b9b00;
+                width: 21.5em;
+                text-align: center;
+                border-radius: 0px 2px 7px 7px;
+                font-family: monospace;
+                padding: 12px 0px 0px 0px;
+                background: white;
+            }
+            form{
+                margin-left: 36%;
+            }
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
+    </head>
+    <body>
+        <div class="container" style="border: 1px solid #c9c9c9;background: #00a3cc;">
+            <div class="col-md-12 headercss" >
+                <img class="col-md-6" src="../static/Logo.png" style="margin-left: 17%;"/>
+                <h1 class="col-md-6">Content-Based Image Retrieval</h1>
+            </div>
+            
+            <form method="POST" enctype="multipart/form-data">
+                <input class="form-control" type="file" name="query_img" style="width: 38%;">
+                <input type="submit" class="btn btn-primary mb-3" style="margin-left: 13%;margin-top: 12px;">   
+            </form>
+            
+            {% if query_path %}
+            <hr>
+            <h2 class="QueryCss">Query:</h2>
+            <img src="{{ query_path }}" width="300px" style="margin-left: 35%;border-radius: 10px;">
+            <hr>
+           <h2 class="QueryCss">Results:</h2>
+            {% endif %}
+            
+            {% for Distance in Distances %}
+            
+            <div class="card" style="margin-left: 35%;margin-bottom: 1%;">
+                <img class="card-img-top" src="{{ Distance[1] }}" alt="Card image cap" style="width: 300px;margin-left: 1px;border-radius: 8px 8px 0px 0px;">
+                <div class="card-body ResultData">
+                  <p class="card-text">
+                      Match Score: {{ Distance[0] }}
+                  </p>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+    </body>
+</html>
+
+
